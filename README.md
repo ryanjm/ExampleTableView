@@ -34,3 +34,5 @@ With the custom cell the search bar will hide if you set `estimatedRowHeight` to
 In order for the custom cell to wrap properly you need to set `estimatedRowHeight` to a fixed number. This then falls into the same problem that the default cell has. If there are enough cells to fill the screen, then it works properly. Otherwise the scrollview won’t let it slide the search bar up.
 
 Based on all of this, there appears to be a bug between `estimatedRowHeight` and `tableView.contentOffset`. Or with custom cells being able to expand properly when using `UITableViewAutomaticDimension`.
+
+I have opened a [radar](https://openradar.appspot.com/radar?id=5061770456596480) about this.
