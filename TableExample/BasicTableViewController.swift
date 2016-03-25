@@ -15,25 +15,18 @@ class BasicTableViewController: UITableViewController, UISearchResultsUpdating {
     var useAutomaticDimension = false
 
     var filteredData:[String] = []
-    var resultSearchController = UISearchController()
+    let resultSearchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Basic + \(useAutomaticDimension ? "w/ automatic" : "w/o automatic")"
 
-        resultSearchController = ({
-            let controller = UISearchController(searchResultsController: nil)
+        resultSearchController.searchResultsUpdater = self
+        resultSearchController.obscuresBackgroundDuringPresentation = false
+        resultSearchController.searchBar.sizeToFit()
 
-            controller.searchResultsUpdater = self
-            controller.obscuresBackgroundDuringPresentation = false
-
-            controller.searchBar.sizeToFit()
-
-            self.tableView.tableHeaderView = controller.searchBar
-            self.tableView.contentOffset = CGPointMake(0, CGRectGetHeight(controller.searchBar.frame))
-
-            return controller
-        })()
+        self.tableView.tableHeaderView = resultSearchController.searchBar
+        self.tableView.contentOffset = CGPointMake(0, CGRectGetHeight(resultSearchController.searchBar.frame))
 
         self.definesPresentationContext = true
 
